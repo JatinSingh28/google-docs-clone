@@ -3,9 +3,6 @@ import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import { io } from "socket.io-client";
 import { useParams } from "react-router-dom";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 const SAVE_INTERVAL_MS = 2000;
 const TOOLBAR_OPTIONS = [
@@ -26,7 +23,8 @@ export default function TextEditor() {
   const [quill, setQuill] = useState();
 
   useEffect(() => {
-    const s = io(process.env.SERVER);
+    const s = io("http://localhost:3001");
+    console.log(s);
     setSocket(s);
 
     return () => {
@@ -36,11 +34,12 @@ export default function TextEditor() {
 
   useEffect(() => {
     if (socket == null || quill == null) return;
-
+    console.log("1");
     socket.once("load-document", (document) => {
       quill.setContents(document);
       quill.enable();
     });
+    console.log(documentId);
 
     socket.emit("get-document", documentId);
   }, [socket, quill, documentId]);
@@ -94,8 +93,8 @@ export default function TextEditor() {
       theme: "snow",
       modules: { toolbar: TOOLBAR_OPTIONS },
     });
-    q.disable();
-    q.setText("Loading...");
+    // q.disable();
+    // q.setText("Loading...");
     setQuill(q);
   }, []);
   return <div className="container" ref={wrapperRef}></div>;

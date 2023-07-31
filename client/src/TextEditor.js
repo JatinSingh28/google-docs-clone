@@ -4,6 +4,7 @@ import "quill/dist/quill.snow.css";
 import { io } from "socket.io-client";
 import { useParams } from "react-router-dom";
 
+
 const SAVE_INTERVAL_MS = 2000;
 const TOOLBAR_OPTIONS = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -23,8 +24,7 @@ export default function TextEditor() {
   const [quill, setQuill] = useState();
 
   useEffect(() => {
-    const s = io("https://google-docs-clone-puce.vercel.app/");
-    console.log(s);
+    const s = io("https://google-docs28.netlify.app/");
     setSocket(s);
 
     return () => {

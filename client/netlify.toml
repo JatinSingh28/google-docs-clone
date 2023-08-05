@@ -1,4 +1,0 @@
-[[redirects]]
-  from = "/documents"
-  to = "https://google-docs-clone-puce.vercel.app/"
-  status = 200

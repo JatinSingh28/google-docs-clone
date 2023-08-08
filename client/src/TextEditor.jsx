@@ -24,7 +24,8 @@ export default function TextEditor() {
   const [quill, setQuill] = useState();
 
   useEffect(() => {
-    const s = io("https://google-docs-clone-puce.vercel.app/");
+    // const s = io("https://google-docs-clone-puce.vercel.app/");
+    const s = io("https://localhost:3001/");
     setSocket(s);
 
     return () => {

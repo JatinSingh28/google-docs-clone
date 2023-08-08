@@ -25,7 +25,7 @@ export default function TextEditor() {
 
   useEffect(() => {
     // const s = io("https://google-docs-clone-puce.vercel.app/");
-    const s = io("https://localhost:3001/");
+    const s = io("http://localhost:3001");
     setSocket(s);
 
     return () => {
@@ -35,7 +35,6 @@ export default function TextEditor() {
 
   useEffect(() => {
     if (socket == null || quill == null) return;
-    console.log("1");
     socket.once("load-document", (document) => {
       quill.setContents(document);
       quill.enable();
@@ -43,6 +42,7 @@ export default function TextEditor() {
     console.log(documentId);
 
     socket.emit("get-document", documentId);
+
   }, [socket, quill, documentId]);
 
   useEffect(() => {
